@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Browzira</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container { max-width: 900px; width: 100%; }
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        h1 { color: #667eea; font-size: 2.5em; }
+        .greeting {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .greeting img { border-radius: 50%; width: 80px; }
+        .search-box { margin: 30px 0; }
+        .search-box input {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 30px;
+        }
+        .search-box button {
+            margin-top: 15px;
+            padding: 12px 30px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+        }
+        .quick-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        .quick-links button {
+            padding: 12px 25px;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .quick-links button:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+        .footer { margin-top: 30px; font-size: 12px; color: #999; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>🌐 Browzira Browser</h1>
+            <div class="greeting">
+                <div><img src="images/ira-300x300.png" alt="Ira"><p><strong>Привіт!</strong></p></div>
+                <div><img src="images/nick-300x300.png" alt="Nick"><p><strong>Сір!</strong></p></div>
+            </div>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Пошук Google або введіть URL...">
+                <button onclick="doSearch()">🔍 Пошук</button>
+            </div>
+            <div class="quick-links">
+                <button onclick="navigateTo('https://www.youtube.com')">▶ YouTube</button>
+                <button onclick="navigateTo('https://www.facebook.com')">📘 Facebook</button>
+                <button onclick="navigateTo('https://mail.google.com')">📧 Gmail</button>
+                <button onclick="navigateTo('https://www.google.com')">🔎 Google</button>
+            </div>
+            <div class="footer">Browzira Browser © 2026</div>
+        </div>
+    </div>
+    <script>
+        function doSearch() {
+            let q = document.getElementById('searchInput').value.trim();
+            if (q) {
+                if (q.includes(' ') || !q.includes('.'))
+                    navigateTo('https://www.google.com/search?q=' + encodeURIComponent(q));
+                else
+                    navigateTo(q);
+            }
+        }
+        function navigateTo(url) {
+            if (!url.startsWith('http')) url = 'https://' + url;
+            window.location.href = url;
+        }
+        document.getElementById('searchInput').addEventListener('keypress', e => { if (e.key === 'Enter') doSearch(); });
+    </script>
+</body>
+</html>
